@@ -1,5 +1,6 @@
 from colorama import init, Fore, Back, Style
 init()
+import random
 
 # Colors
 RED = '\033[91m'
@@ -34,6 +35,8 @@ WOLF = Enemy("Wolf", 20, 5, 1)
 ORC = Enemy("Orc", 30, 10, 2)
 TROLL = Enemy("Troll", 50, 20, 3)
 
+random_enemy = random.choice([WOLF, ORC, TROLL])
+
 # Player Statistics
 name = "Karma"
 level = 1 
@@ -47,9 +50,7 @@ max_hp = hp
 actions = [
     "stats",
     "rest",
-    "fight Wolf",
-    "fight Orc",
-    "fight Troll"
+    "fight",
 ]
 
 def show_status():
@@ -62,7 +63,6 @@ def show_status():
 
 def fight(enemy):
     global hp, gold, level
-    
     enemy.reset_hp()
     print(f"{RED}A {enemy.name} appears!{RESET}")
     
@@ -139,11 +139,7 @@ def main():
             elif choice == 2:
                 rest()
             elif choice == 3:
-                fight(WOLF)
-            elif choice == 4:
-                fight(ORC)
-            elif choice == 5:
-                fight(TROLL)
+                fight(random_enemy)
             else:
                 print(f"{RED}Invalid input!{RESET}")
         except ValueError:
